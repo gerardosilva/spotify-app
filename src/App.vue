@@ -1,26 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <header class="my-4">
+      <h1>My Spotify App</h1>
+    </header>
+    <main>
+      <auth-component v-if="!$store.state.accessToken" />
+      <div v-else>
+        <top-component />
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AuthComponent from './components/AuthComponent.vue';
+import TopComponent from './components/TopComponent.vue';
+import { mapState } from 'vuex';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    AuthComponent,
+    TopComponent,
+  },
+  computed: {
+    ...mapState(['accessToken']),
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
