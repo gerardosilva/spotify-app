@@ -16,7 +16,8 @@
         <h2 class="my-4">Top 10 Songs</h2>
         <ul>
           <li v-for="song in topSongs" :key="song.id">
-            <router-link :to="{ name: 'track-details', params: { id: song.id } }">{{ song.name }}</router-link>
+            <router-link :to="{ name: 'track-details', params: { id: song.id } }">{{ song.name }} -  {{ song.artists[0].name }}</router-link>
+            <audio :src="song.preview_url" controls></audio>
           </li>  
         </ul>
     </div>

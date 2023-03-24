@@ -7,7 +7,7 @@
     <h2>Top Tracks</h2>
     <ul>
       <li v-for="track in artist.topTracks" :key="track.id">
-        {{ track.name }}
+        {{ track.name }} - {{ track.album.name }} <audio :src="track.preview_url" controls></audio>
       </li>
     </ul>
   </div>
@@ -36,6 +36,12 @@ export default {
   created() {
     this.spotifyApi.getArtist(this.id).then(response => {
       this.artist = response;
+    }).catch(error => {
+      console.error(error);
+    });
+    this.spotifyApi.getArtistTopTracks(this.id, 'ES').then(response => {
+      this.artist.topTracks = response.tracks;
+      console.log(response.tracks);
     }).catch(error => {
       console.error(error);
     });
