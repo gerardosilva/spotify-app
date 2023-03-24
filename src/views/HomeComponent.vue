@@ -1,25 +1,26 @@
 <template>
-    <div class="container">
-      <h2 class="my-4">Top 10 Artists</h2>
-      <div class="row">
+    <div>
+        <h2 class="my-4">Top 10 Artists</h2>
+        <div class="row">
         <router-link class="col-md-4 mb-4" v-for="artist in topArtists" :key="artist.id" :to="{ name: 'artist-details', params: { id: artist.id } }">
             <div class="card">
-                <img :src="artist.images[0].url" class="card-img-top" alt="...">
-                <div class="card-body">
+            <img :src="artist.images[0].url" class="card-img-top" alt="...">
+            <div class="card-body">
                 <h5 class="card-title">{{ artist.name }}</h5>
                 <p class="card-text">{{ artist.genres.join(', ') }}</p>
-                </div>
+            </div>
             </div>
         </router-link>
-      </div>
-      <h2 class="my-4">Top 10 Songs</h2>
-      <ul>
+        </div>
+
+        <h2 class="my-4">Top 10 Songs</h2>
+        <ul>
         <li v-for="song in topSongs" :key="song.id">{{ song.name }}</li>
-      </ul>
+        </ul>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import SpotifyWebApi from 'spotify-web-api-js';
   import { mapState } from 'vuex';
   
@@ -42,5 +43,5 @@
       this.topSongs = tracks.items;
     },
   };
-  </script>
+</script>
   

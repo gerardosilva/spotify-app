@@ -1,12 +1,21 @@
 <template>
   <div class="container">
-    <header class="my-4">
-      <h1>My Spotify App</h1>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <router-link class="navbar-brand" to="/"><h1>Spotify App</h1></router-link>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/">Home</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <main>
-      <auth-component v-if="!$store.state.accessToken" />
+      <auth-component v-if="!accessToken" />
       <div v-else>
-        <top-component />
+        <router-view />
       </div>
     </main>
   </div>
@@ -14,13 +23,11 @@
 
 <script>
 import AuthComponent from './components/AuthComponent.vue';
-import TopComponent from './components/TopComponent.vue';
 import { mapState } from 'vuex';
 
 export default {
   components: {
     AuthComponent,
-    TopComponent,
   },
   computed: {
     ...mapState(['accessToken']),

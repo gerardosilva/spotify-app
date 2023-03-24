@@ -1,6 +1,5 @@
 <template>
     <div>
-      <h1>Spotify Callback Page</h1>
     </div>
   </template>
   
@@ -30,7 +29,6 @@
       const code = params.get('code');
       if (code) {
         await this.getToken(code);
-        this.$router.push('/');
       }
     },
     methods: {
@@ -47,7 +45,7 @@
         this.accessToken = data.access_token;
         this.refreshToken = data.refresh_token;
         this.spotifyApi.setAccessToken(this.accessToken);
-        this.setAccessToken(this.accessToken);
+        this.$router.push('/');
         },
     },
   };
